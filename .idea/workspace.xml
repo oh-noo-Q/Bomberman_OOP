@@ -3,8 +3,33 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3c02dcf-1f5a-4b7d-9a70-72ca058c4377" name="Default Changelist" comment="" />
+    <list default="true" id="e3c02dcf-1f5a-4b7d-9a70-72ca058c4377" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uet/oop/bomberman/BombermanGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uet/oop/bomberman/BombermanGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uet/oop/bomberman/entities/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uet/oop/bomberman/entities/Bomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uet/oop/bomberman/entities/Bomber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uet/oop/bomberman/entities/Bomber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uet/oop/bomberman/graphics/SpriteSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uet/oop/bomberman/graphics/SpriteSheet.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +41,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -31,9 +59,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/GitHub/Boomberman_OOP" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.codota.intellij.common.configuration.CodotaConfigurable" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/pom.xml" />
   </component>
   <component name="RunManager" selected="Application.BombermanGame">
     <configuration name="BombermanGame" type="Application" factoryName="Application" nameIsGenerated="true">
@@ -79,15 +109,27 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="447" y="102" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604654166825">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
     <state x="447" y="102" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.30.1536.834@0.30.1536.834" timestamp="1604654166825" />
-    <state x="574" y="154" key="#com.intellij.ide.util.MemberChooser" timestamp="1606285497756">
+    <state x="574" y="154" key="#com.intellij.ide.util.MemberChooser" timestamp="1606504417777">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state x="574" y="154" key="#com.intellij.ide.util.MemberChooser/0.30.1536.834@0.30.1536.834" timestamp="1606285497756" />
+    <state x="574" y="154" key="#com.intellij.ide.util.MemberChooser/0.30.1536.834@0.30.1536.834" timestamp="1606504417777" />
     <state x="551" y="342" width="433" height="216" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1605621739998">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
@@ -96,42 +138,50 @@
       <screen x="0" y="30" width="1536" height="834" />
     </state>
     <state x="528" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.30.1536.834@0.30.1536.834" timestamp="1605621406566" />
-    <state x="549" y="202" key="FileChooserDialogImpl" timestamp="1606120167134">
+    <state x="93" y="123" width="1350" height="648" key="DiffContextDialog" timestamp="1606399783322">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state x="549" y="202" key="FileChooserDialogImpl/0.30.1536.834@0.30.1536.834" timestamp="1606120167134" />
-    <state width="714" height="209" key="GridCell.Tab.0.bottom" timestamp="1606396742800">
+    <state x="93" y="123" width="1350" height="648" key="DiffContextDialog/0.30.1536.834@0.30.1536.834" timestamp="1606399783322" />
+    <state x="549" y="202" key="FileChooserDialogImpl" timestamp="1606399721925">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state width="714" height="209" key="GridCell.Tab.0.bottom/0.30.1536.834@0.30.1536.834" timestamp="1606396742800" />
-    <state width="714" height="209" key="GridCell.Tab.0.center" timestamp="1606396742800">
+    <state x="549" y="202" key="FileChooserDialogImpl/0.30.1536.834@0.30.1536.834" timestamp="1606399721925" />
+    <state width="1493" height="209" key="GridCell.Tab.0.bottom" timestamp="1606504187692">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state width="714" height="209" key="GridCell.Tab.0.center/0.30.1536.834@0.30.1536.834" timestamp="1606396742800" />
-    <state width="714" height="209" key="GridCell.Tab.0.left" timestamp="1606396742800">
+    <state width="1493" height="209" key="GridCell.Tab.0.bottom/0.30.1536.834@0.30.1536.834" timestamp="1606504187692" />
+    <state width="1493" height="209" key="GridCell.Tab.0.center" timestamp="1606504187692">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state width="714" height="209" key="GridCell.Tab.0.left/0.30.1536.834@0.30.1536.834" timestamp="1606396742800" />
-    <state width="714" height="209" key="GridCell.Tab.0.right" timestamp="1606396742800">
+    <state width="1493" height="209" key="GridCell.Tab.0.center/0.30.1536.834@0.30.1536.834" timestamp="1606504187692" />
+    <state width="1493" height="209" key="GridCell.Tab.0.left" timestamp="1606504187692">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state width="714" height="209" key="GridCell.Tab.0.right/0.30.1536.834@0.30.1536.834" timestamp="1606396742800" />
-    <state width="714" height="261" key="GridCell.Tab.1.bottom" timestamp="1606333846634">
+    <state width="1493" height="209" key="GridCell.Tab.0.left/0.30.1536.834@0.30.1536.834" timestamp="1606504187692" />
+    <state width="1493" height="209" key="GridCell.Tab.0.right" timestamp="1606504187692">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state width="714" height="261" key="GridCell.Tab.1.bottom/0.30.1536.834@0.30.1536.834" timestamp="1606333846634" />
-    <state width="714" height="261" key="GridCell.Tab.1.center" timestamp="1606333846633">
+    <state width="1493" height="209" key="GridCell.Tab.0.right/0.30.1536.834@0.30.1536.834" timestamp="1606504187692" />
+    <state width="1493" height="264" key="GridCell.Tab.1.bottom" timestamp="1606495440848">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state width="714" height="261" key="GridCell.Tab.1.center/0.30.1536.834@0.30.1536.834" timestamp="1606333846633" />
-    <state width="714" height="261" key="GridCell.Tab.1.left" timestamp="1606333846633">
+    <state width="1493" height="264" key="GridCell.Tab.1.bottom/0.30.1536.834@0.30.1536.834" timestamp="1606495440848" />
+    <state width="1493" height="264" key="GridCell.Tab.1.center" timestamp="1606495440848">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state width="714" height="261" key="GridCell.Tab.1.left/0.30.1536.834@0.30.1536.834" timestamp="1606333846633" />
-    <state width="714" height="261" key="GridCell.Tab.1.right" timestamp="1606333846633">
+    <state width="1493" height="264" key="GridCell.Tab.1.center/0.30.1536.834@0.30.1536.834" timestamp="1606495440848" />
+    <state width="1493" height="264" key="GridCell.Tab.1.left" timestamp="1606495440848">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
-    <state width="714" height="261" key="GridCell.Tab.1.right/0.30.1536.834@0.30.1536.834" timestamp="1606333846633" />
+    <state width="1493" height="264" key="GridCell.Tab.1.left/0.30.1536.834@0.30.1536.834" timestamp="1606495440848" />
+    <state width="1493" height="264" key="GridCell.Tab.1.right" timestamp="1606495440848">
+      <screen x="0" y="30" width="1536" height="834" />
+    </state>
+    <state width="1493" height="264" key="GridCell.Tab.1.right/0.30.1536.834@0.30.1536.834" timestamp="1606495440848" />
+    <state x="461" y="168" key="RollbackChangesDialog" timestamp="1606399745227">
+      <screen x="0" y="30" width="1536" height="834" />
+    </state>
+    <state x="461" y="168" key="RollbackChangesDialog/0.30.1536.834@0.30.1536.834" timestamp="1606399745227" />
     <state x="277" y="92" key="SettingsEditor" timestamp="1604544859342">
       <screen x="0" y="30" width="1536" height="834" />
     </state>
