@@ -12,7 +12,9 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
 
 public class Bomber extends Animated {
@@ -38,6 +40,12 @@ public class Bomber extends Animated {
             bombs.remove(0);
         }
         controll();
+        if(alive == false) {
+            if(timeForDie > 0) timeForDie--;
+            else {
+                removed();
+            }
+        }
     }
 
     public void input(Scene scene) {
@@ -66,12 +74,12 @@ public class Bomber extends Animated {
                 }
             }
         }
+
         return true;
     }
 
     @Override
     public void render(GraphicsContext gc) {
-        super.render(gc);
         detail_sprite();
         if (bombs.size() != 0) {
             for(int i = 0; i < bombs.size(); i++) {
@@ -79,6 +87,7 @@ public class Bomber extends Animated {
                 bombs.get(i).render(gc);
             }
         }
+        super.render(gc);
     }
 
     public void killed() {
@@ -94,7 +103,7 @@ public class Bomber extends Animated {
 
         return true;
     }
-    
+
     public void controll() {
         if(this.alive == true) {
             if (inputList.contains("RIGHT")) {
@@ -159,5 +168,23 @@ public class Bomber extends Animated {
         else {
             this.img = Sprite.player_dead2.getFxImage();
         }
+    }
+
+    public Entity getBombAt(int x0, int y0) {
+        if(bombs.size() > 0) {
+            for(int i = 0; i < bombs.size(); i++) {
+                if(bombs.get(i).getX() / Sprite.SCALED_SIZE == x0 && bombs.get(i).getY() / Sprite.SCALED_SIZE == y0)
+                    return bombs.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void reset() {
+        this.setX(48);
+        this.setY(48);
+        this.alive = true;
+        timeForDie = 30;
+        this.setRemove(false);
     }
 }

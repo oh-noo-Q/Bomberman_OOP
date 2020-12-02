@@ -52,12 +52,14 @@ public class Bomb extends Animated{
             img = Sprite.bomb_exploded2.getFxImage();
             if(Explosion.length > 0) {
                 for(int i = 0; i < Explosion.length; i++) {
-                    int x0 = Explosion[i].getX() / Sprite.SCALED_SIZE;
-                    int y0 = Explosion[i].getY() / Sprite.SCALED_SIZE;
-                    Entity x = game.getObjectAt(x0, y0);
-                    if(x != null) {
-                        if(x.collide(Explosion[i])) {
-                            Explosion[i].render(gc);
+                    if(Explosion[i] != null) {
+                        Explosion[i].render(gc);
+                        int x0 = Explosion[i].getX() / Sprite.SCALED_SIZE;
+                        int y0 = Explosion[i].getY() / Sprite.SCALED_SIZE;
+                        Entity x = game.getCharacter(x0, y0);
+                        if (x != null) {
+                            if (x.collide(Explosion[i])) {
+                            }
                         }
                     }
                 }
@@ -71,6 +73,12 @@ public class Bomb extends Animated{
 
     public void explosion() {
         _exploded = true;
+
+        Animated b = (Animated) game.getCharacter(this.x / Sprite.SCALED_SIZE, this.y / Sprite.SCALED_SIZE);
+        if(b != null) {
+            b.killed();
+        }
+
         if(Explosion == null) {
             Explosion = new DirectionBomb[lvlbomb * 4];
             for (int i = 0; i < Explosion.length; i++) {
@@ -92,7 +100,12 @@ public class Bomb extends Animated{
                         break;
                 }
                 DirectionBomb direction_ = new DirectionBomb(x_, y_, i, last);
-                Explosion[i] = direction_;
+                Entity q = game.getObjectAt(x_, y_);
+                if(q != null) {
+                    if(q.collide(direction_)) {
+                        Explosion[i] = direction_;
+                    }
+                }
             }
         }
     }
@@ -100,12 +113,13 @@ public class Bomb extends Animated{
     @Override
     public boolean collide(Entity e) {
         if(e instanceof Bomber) {
-            double dX = e.getX() - this.getX();
-            double dY = e.getY() - this.getY();
+            double dX = (e.getX() - this.getX()) ;
+            double dY = (e.getY() - this.getY()) ;
 
-            if ((dX >= -15 && dX <= 30 && dY >= -30 && dY <= 30)) {
+            if(!(dX >= -24 && dX <= 40 && dY >= -42 && dY <= 30)) {
                 return false;
             }
+            return true;
         }
 
         if(e instanceof DirectionBomb) {

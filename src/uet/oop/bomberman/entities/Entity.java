@@ -19,6 +19,10 @@ public abstract class Entity{
 
     public void removed() {this.remove = true;}
 
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
     public boolean isRemove() {
         return remove;
     }

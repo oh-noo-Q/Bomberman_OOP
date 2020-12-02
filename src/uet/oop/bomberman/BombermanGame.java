@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public class BombermanGame extends Application {
 
-    public static final int WIDTH = 20;
+    public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
 
     private GraphicsContext gc;
@@ -58,14 +58,17 @@ public class BombermanGame extends Application {
             public void handle(long l) {
                 render();
                 update();
+                if(bomberman.isRemove() == true) {
+                    if(entities.size() > 0)
+                        entities.remove(0);
+                }
+                if(entities.size() == 0) {
+                    reset_player();
+                }
             }
         };
         timer.start();
         bomberman.input(scene);
-        if(bomberman.isRemove() == true) {
-            entities.remove(0);
-            System.out.println("da xoa");
-        }
         createMap();
 
     }
@@ -76,7 +79,7 @@ public class BombermanGame extends Application {
             Scanner scan = new Scanner(map_file);
             for(int i = 0; i < HEIGHT; i++) {
                 String s = scan.nextLine();
-                for(int j = 0; j < 30; j++) {
+                for(int j = 0; j < 31; j++) {
                     char x = s.charAt(j);
                     Entity object = null;
                     if(x == '#') {
@@ -99,7 +102,7 @@ public class BombermanGame extends Application {
 
     public void update() {
         entities.forEach(Entity::update);
-        bricks.forEach(Entity::update);
+        bricks.forEach(Brick::update);
         if(bricks.size() > 0) {
             for(int i = 0; i < bricks.size(); i++) {
                 if(bricks.get(i).isRemove() == true) {
@@ -128,6 +131,9 @@ public class BombermanGame extends Application {
             }
         }
 
+        Entity bomb_ = bomberman.getBombAt(x, y);
+        if(bomb_ != null) return bomb_;
+
         Iterator<Entity> a =stillObjects.iterator();
         Entity barrier;
         while(a.hasNext()) {
@@ -137,8 +143,46 @@ public class BombermanGame extends Application {
             }
         }
 
+        return null;
+    }
+
+    public Entity getCharacter(int x, int y) {
+        Iterator<Entity> c = entities.iterator();
+        Entity p;
+        while(c.hasNext()) {
+            p = c.next();
+            if(p.getX() / Sprite.SCALED_SIZE == x && p.getY() / Sprite.SCALED_SIZE == y) {
+                return p;
+            }
+            if(p.getX() / Sprite.SCALED_SIZE < x) {
+                if((p.getX() + 32) / Sprite.SCALED_SIZE == x && p.getY() / Sprite.SCALED_SIZE == y) {
+                    return p;
+                }
+            }
+            if(p.getY() / Sprite.SCALED_SIZE < y ) {
+                if(p.getX() / Sprite.SCALED_SIZE == x && (p.getY() + 32) / Sprite.SCALED_SIZE == y) {
+                    return p;
+                }
+            }
+
+        }
 
         return null;
     }
 
+    public void move_map() {
+        for(int i = 0; i < stillObjects.size(); i++) {
+            int x = stillObjects.get(i).getX();
+            stillObjects.get(i).setX(x - 32);
+        }
+        for(int i = 0; i < bricks.size(); i++) {
+            int x = bricks.get(i).getX();
+            bricks.get(i).setX(x - 32);
+        }
+    }
+
+    public void reset_player() {
+        bomberman.reset();
+        entities.add(bomberman);
+    }
 }
