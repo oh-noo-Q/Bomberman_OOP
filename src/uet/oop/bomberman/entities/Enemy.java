@@ -2,18 +2,25 @@ package uet.oop.bomberman.entities;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
+
+import java.util.Random;
 
 
 public  abstract class Enemy extends Animated{
-    private int timeFordie = 30;
-    private int timeAfterDie = 15;
+    protected int timeFordie = 30;
+    protected int timeAfterDie = 15;
     private Image dead_image;
     protected int direction = -1;
+    protected AI ai;
+    private BombermanGame game;
+    private boolean moving = false;
 
-    public Enemy(int x, int y, Image img, Image dead_image) {
+    public Enemy(int x, int y, Image img, Image dead_image, BombermanGame game) {
         super(x,y, img);
         this.dead_image = dead_image;
+        this.game = game;
     }
 
     @Override
@@ -26,24 +33,74 @@ public  abstract class Enemy extends Animated{
                 if (timeFordie > 0) {
                     timeFordie--;
                 }
-                else removed();
+                else {
+                    game.removeEnemy(this);
+                    removed();
+                }
             }
         }
 
         if(alive == true) {
-
+//            direction = 3;
+//            if (direction == 3 && can_move(-1, 0, game)) {
+//                this.x -= step;
+//                moving = true;
+//            }
+//            if (direction == 2 && can_move(0, 1, game)) {
+//                this.y += step;
+//                moving = true;
+//            }
+//            if (direction == 1 && can_move(1, 0, game)) {
+//                this.x += step;
+//                moving = true;
+//            }
+//            if (direction == 0 && can_move(0, -1, game)) {
+//                this.y -= step;
+//                moving = true;
+//            }
         }
+    }
+
+    public void changeDir() {
+        int dir = new Random().nextInt(4);
+        direction = dir;
+    }
+
+    public boolean can_move(int x0, int y0, BombermanGame game) {
+        for(int i = 0; i < 4; i++) {
+            double x_ = (x0 * step + this.x + i % 2 * 20 + 8) / Sprite.SCALED_SIZE;
+            double y_ = (y0 * step + this.y + i / 2 * 30 + 12) / Sprite.SCALED_SIZE;
+
+            Entity x = game.getObjectAt((int)x_, (int)y_);
+            if(x != null) {
+                if (!x.collide(this)) {
+                    changeDir();
+                    return false;
+                }
+            }
+            x = game.getCharacter((int)x_, (int)y_);
+            if (x != null) {
+                x.collide(this);
+            }
+        }
+        return true;
     }
 
     @Override
     public void render(GraphicsContext gc) {
+        gc.drawImage(img, x, y);
         if(alive == true) {
             detail_sprite();
         }
         else {
-            if(timeAfterDie > 0) this.img = dead_image;
-            else
+            if(timeAfterDie > 0) {
+                this.img = dead_image;
+            }
+            else {
                 this.img = Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, animate, 60).getFxImage();
+
+            }
+
         }
     }
 
@@ -57,15 +114,16 @@ public  abstract class Enemy extends Animated{
 
     @Override
     public boolean collide(Entity e) {
-        if(e instanceof DirectionBomb) {
+        if (e instanceof DirectionBomb) {
             killed();
             return false;
         }
 
-        if(e instanceof Bomber) {
+        if (e instanceof Bomber) {
             ((Bomber)e).killed();
             return false;
         }
+
         return true;
     }
 }

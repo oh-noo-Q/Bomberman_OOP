@@ -51,10 +51,13 @@ public class DirectionBomb extends Entity{
     public void update() {
 
     }
-
+    @Override
     public boolean collide(Entity e) {
-        if(e instanceof Bomber) {
+        if (e instanceof Bomber) {
             ((Bomber) e).killed();
+        }
+        if (e instanceof Enemy) {
+            ((Enemy) e).killed();
         }
         return true;
     }

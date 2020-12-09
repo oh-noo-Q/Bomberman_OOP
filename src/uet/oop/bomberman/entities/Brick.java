@@ -33,12 +33,13 @@ public class Brick extends Entity{
         gc.drawImage(img, x, y);
     }
 
+    @Override
     public boolean collide(Entity e) {
         if(e instanceof DirectionBomb) {
             destroy();
         }
         return false;
-     }
+    }
 
     public void destroy() {
         this.destroyed = true;

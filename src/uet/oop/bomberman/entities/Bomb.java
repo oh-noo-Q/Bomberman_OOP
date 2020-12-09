@@ -58,8 +58,11 @@ public class Bomb extends Animated{
                         int y0 = Explosion[i].getY() / Sprite.SCALED_SIZE;
                         Entity x = game.getCharacter(x0, y0);
                         if (x != null) {
-                            if (x.collide(Explosion[i])) {
-                            }
+                            x.collide(Explosion[i]);
+                        }
+                        x = game.getEnemy(x0, y0);
+                        if (x != null) {
+                            x.collide(Explosion[i]);
                         }
                     }
                 }

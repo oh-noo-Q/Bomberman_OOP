@@ -96,9 +96,15 @@ public class Bomber extends Animated {
 
     @Override
     public boolean collide(Entity e) {
-        if(e instanceof  DirectionBomb) {
+        System.out.println("???");
+
+        if (e instanceof DirectionBomb) {
             killed();
-            return true;
+            return false;
+        }
+        if (e instanceof Enemy) {
+            killed();
+            return false;
         }
 
         return true;

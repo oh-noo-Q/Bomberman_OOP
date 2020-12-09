@@ -29,8 +29,9 @@ public class BombermanGame extends Application {
     private Canvas canvas;
     private List<Entity> entities = new ArrayList<>();
     private List<Entity> stillObjects = new ArrayList<>();
-    private Bomber bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), this);
+    public Bomber bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), this);
     private List<Brick> bricks = new ArrayList<>();
+    private List<Enemy> enemies = new ArrayList<>();
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -92,6 +93,14 @@ public class BombermanGame extends Application {
                         Brick b = new Brick(j, i);
                         bricks.add(b);
                     }
+                    if (x == '1') {
+                        Balloom balloom = new Balloom(j, i, Sprite.balloom_left1.getFxImage(), Sprite.balloom_dead.getFxImage(), this);
+                        enemies.add(balloom);
+                    }
+                    if (x == '2') {
+                        Oneal oneal = new Oneal(j, i, Sprite.oneal_left1.getFxImage(), Sprite.oneal_dead.getFxImage(), this);
+                        enemies.add(oneal);
+                    }
                     stillObjects.add(object);
                 }
             }
@@ -101,6 +110,10 @@ public class BombermanGame extends Application {
     }
 
     public void update() {
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity e = enemies.get(i);
+            e.update();
+        }
         entities.forEach(Entity::update);
         bricks.forEach(Brick::update);
         if(bricks.size() > 0) {
@@ -118,7 +131,7 @@ public class BombermanGame extends Application {
         stillObjects.forEach(g -> g.render(gc));
         bricks.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
-
+        enemies.forEach(g -> g.render(gc));
     }
 
     public Entity getObjectAt(int x, int y) {
@@ -134,7 +147,7 @@ public class BombermanGame extends Application {
         Entity bomb_ = bomberman.getBombAt(x, y);
         if(bomb_ != null) return bomb_;
 
-        Iterator<Entity> a =stillObjects.iterator();
+        Iterator<Entity> a = stillObjects.iterator();
         Entity barrier;
         while(a.hasNext()) {
             barrier = a.next();
@@ -169,6 +182,27 @@ public class BombermanGame extends Application {
 
         return null;
     }
+    public Entity getEnemy(int x, int y) {
+        Iterator<Entity> c = entities.iterator();
+        Entity p;
+        for (int i = 0; i < enemies.size(); i++) {
+            p = enemies.get(i);
+            if (p.getX() / Sprite.SCALED_SIZE == x && p.getY() / Sprite.SCALED_SIZE == y) {
+                return p;
+            }
+            if (p.getX() / Sprite.SCALED_SIZE < x) {
+                if ((p.getX() + 32) / Sprite.SCALED_SIZE == x && p.getY() / Sprite.SCALED_SIZE == y) {
+                    return p;
+                }
+            }
+            if (p.getY() / Sprite.SCALED_SIZE < y) {
+                if (p.getX() / Sprite.SCALED_SIZE == x && (p.getY() + 32) / Sprite.SCALED_SIZE == y) {
+                    return p;
+                }
+            }
+        }
+        return null;
+    }
 
     public void move_map() {
         for(int i = 0; i < stillObjects.size(); i++) {
@@ -184,5 +218,9 @@ public class BombermanGame extends Application {
     public void reset_player() {
         bomberman.reset();
         entities.add(bomberman);
+    }
+
+    public void removeEnemy(Entity e) {
+        enemies.remove(e);
     }
 }
