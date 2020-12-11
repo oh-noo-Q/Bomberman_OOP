@@ -6,13 +6,14 @@ import uet.oop.bomberman.graphics.Sprite;
 
 public class Oneal extends Enemy {
     private BombermanGame game;
-    private boolean moving = true;
+    private boolean moving = false;
 
 
     public Oneal(int x, int y, Image img, Image dead_image, BombermanGame game) {
         super(x, y, img, dead_image, game);
         this.alive = true;
-        ai = new AILow();
+        ai = new AIMedium(game.bomberman, this);
+//        ai = new AILow();
         direction = ai.calculate_move();
         this.game = game;
     }
@@ -22,20 +23,20 @@ public class Oneal extends Enemy {
         if(alive == true) {
             switch (this.direction) {
                 case 0:
-                    this.img = Sprite.oneal_right1.getFxImage();
-                    if(moving) this.img = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, animate, 60).getFxImage();
-                    break;
                 case 1:
-                    this.img = Sprite.oneal_right1.getFxImage();
-                    if(moving) this.img = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, animate, 60).getFxImage();
+                    if(moving) {
+                        this.img = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, animate, 60).getFxImage();
+                    } else {
+                        this.img =Sprite.oneal_left1.getFxImage();
+                    }
                     break;
                 case 2:
-                    this.img = Sprite.oneal_left1.getFxImage();
-                    if(moving) this.img = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, animate, 60).getFxImage();
-                    break;
                 case 3:
-                    this.img = Sprite.oneal_right1.getFxImage();
-                    if(moving) this.img = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, animate, 60).getFxImage();
+                    if(moving) {
+                        this.img = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, animate, 60).getFxImage();
+                    } else {
+                        this.img = Sprite.oneal_right1.getFxImage();
+                    }
                     break;
             }
         }
@@ -61,33 +62,36 @@ public class Oneal extends Enemy {
         }
 
         if(alive == true) {
-         // direction = ai.calculate_move();
-//            if (game.bomberman.x /32 < this.x / 32) {
-//                this.direction = 3;
-//            } else if (game.bomberman.x / 32 > this.x / 32) {
-//                this.direction = 1;
-//            } else if (this.game.bomberman.y / 32 < this.y / 32) {
-//                this.direction = 0;
-//            } else if (this.game.bomberman.y / 32 > this.y / 32) {
-//                this.direction = 2;
-//            }
+//            direction = ai.calculate_move();
+            if (game.bomberman.x / 16 < this.x / 16 && can_move(-1, 0, game)) {
+                this.direction = 3;
+            } else if (this.game.bomberman.y / 16 < this.y / 16 && can_move(0, -1, game)) {
+                this.direction = 0;
+            } else if (this.game.bomberman.y / 16 > this.y / 16 && can_move(0, 1, game)) {
+                this.direction = 2;
+            } else if (game.bomberman.x / 16 > this.x / 16 && can_move(1, 0, game)) {
+                this.direction = 1;
+            }
 
 //            System.out.println(direction);
+//            System.out.println(moving);
             if (direction == 3 && can_move(-1, 0, game)) {
-                this.x -= step;
+                this.x -= step + 1;
                 moving = true;
             }
-            if (direction == 2 && can_move(0, 1, game)) {
-                this.y += step;
+            else if (direction == 2 && can_move(0, 1, game)) {
+                this.y += step + 1;
                 moving = true;
             }
-            if (direction == 1 && can_move(1, 0, game)) {
-                this.x += step;
+            else if (direction == 1 && can_move(1, 0, game)) {
+                this.x += step + 1;
                 moving = true;
             }
-            if (direction == 0 && can_move(0, -1, game)) {
-                this.y -= step;
+            else if (direction == 0 && can_move(0, -1, game)) {
+                this.y -= step + 1;
                 moving = true;
+            } else {
+                moving = false;
             }
         }
     }
