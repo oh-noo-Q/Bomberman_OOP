@@ -1,0 +1,7 @@
+5
+
+menuProMix sound/soundtrack.wav
+enemyDead sound/AA126_11.wav
+playerDead sound/endgame3.wav
+bommm sound/BOM_11_M.wav
+bomSet sound/BOM_SET.wav

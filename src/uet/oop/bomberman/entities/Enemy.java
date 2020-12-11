@@ -2,8 +2,10 @@ package uet.oop.bomberman.entities;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.MediaPlayer;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.CacheDataLoader;
 
 import java.util.Random;
 
@@ -16,6 +18,7 @@ public  abstract class Enemy extends Animated{
     protected AI ai;
     private BombermanGame game;
     private boolean moving = false;
+    private int timeToChange = 500;
 
     public Enemy(int x, int y, Image img, Image dead_image, BombermanGame game) {
         super(x,y, img);
@@ -74,9 +77,11 @@ public  abstract class Enemy extends Animated{
             double y_ = (y0 * step + this.y + dY) / Sprite.SCALED_SIZE;
 
             Entity x = game.getObjectAt((int)x_, (int)y_);
+            timeToChange--;
             if(x != null) {
-                if (!x.collide(this)) {
+                if (!x.collide(this) || timeToChange < 0) {
                     changeDir();
+                    timeToChange = 500;
                     return false;
                 }
             }
@@ -86,6 +91,7 @@ public  abstract class Enemy extends Animated{
             }
         return true;
     }
+
 
     @Override
     public void render(GraphicsContext gc) {
@@ -109,6 +115,8 @@ public  abstract class Enemy extends Animated{
     @Override
     public void killed() {
         this.alive = false;
+        BombermanGame.enemyDead.stop();
+        BombermanGame.enemyDead.play();
     }
 
     public abstract void detail_sprite();

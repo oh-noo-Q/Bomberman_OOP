@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.Powerup.Bombsup;
@@ -14,10 +15,12 @@ import uet.oop.bomberman.entities.Powerup.Flameup;
 import uet.oop.bomberman.entities.Powerup.Powerup;
 import uet.oop.bomberman.entities.Powerup.Speed;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.CacheDataLoader;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +31,15 @@ public class BombermanGame extends Application {
 
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
+
+    public static MediaPlayer gameMusic;
+    public static MediaPlayer gameStart;
+    private MediaPlayer soundWin;
+    private MediaPlayer menuSound;
+    public static MediaPlayer enemyDead;
+    public static MediaPlayer bomberDead;
+    public static MediaPlayer bom;
+    public static MediaPlayer bomSet;
 
     private GraphicsContext gc;
     private Canvas canvas;
@@ -48,6 +60,36 @@ public class BombermanGame extends Application {
         // Tao Canvas
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
+
+        try {
+            CacheDataLoader.getInstance().LoadData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        gameMusic = CacheDataLoader.getInstance().getSound("gameMusicPro");
+//        gameMusic.setVolume(0.5);
+//        gameStart = CacheDataLoader.getInstance().getSound("gameStart");
+//        gameStart.setVolume(0.7);
+//
+//        soundWin = CacheDataLoader.getInstance().getSound("takeBom");
+//        soundWin.setVolume(1);
+//        soundWin.play();
+
+        enemyDead = CacheDataLoader.getInstance().getSound("enemyDead");
+        enemyDead.setVolume(1);
+
+        bomberDead = CacheDataLoader.getInstance().getSound("playerDead");
+        bomberDead.setVolume(1);
+
+        bom = CacheDataLoader.getInstance().getSound("bommm");
+        bom.setVolume(1);
+
+        bomSet = CacheDataLoader.getInstance().getSound("bomSet");
+        bomSet.setVolume(1);
+
+        menuSound = CacheDataLoader.getInstance().getSound("menuProMix");
+        menuSound.setVolume(0.5);
+        menuSound.play();
 
         // Tao root container
         Group root = new Group();
