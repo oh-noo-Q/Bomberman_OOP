@@ -36,13 +36,17 @@ public class Bomb extends Animated{
         }
         else {
             if(!_exploded) {
+                BombermanGame.bom.stop();
+                BombermanGame.bom.play();
                 explosion();
             }
 
             if(timeForExplode > 0) {
                 timeForExplode--;
             }
-            else removed();
+            else {
+                removed();
+            }
         }
     }
 

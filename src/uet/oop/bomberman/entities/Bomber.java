@@ -92,6 +92,8 @@ public class Bomber extends Animated {
 
     public void killed() {
         this.setAlive(false);
+        BombermanGame.bomberDead.stop();
+        BombermanGame.bomberDead.play();
     }
 
     @Override
@@ -139,6 +141,8 @@ public class Bomber extends Animated {
                 moving = true;
             }
             if (inputList.contains("SPACE")) {
+                BombermanGame.bomSet.stop();
+                BombermanGame.bomSet.play();
                 if (bombs.size() < max_bomb) {
                     int x = (this.x + 16) / Sprite.SCALED_SIZE;
                     int y = (this.y + 16) / Sprite.SCALED_SIZE;

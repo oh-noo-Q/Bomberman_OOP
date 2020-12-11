@@ -32,6 +32,10 @@ public class BombermanGame extends Application {
     public static MediaPlayer gameStart;
     private MediaPlayer soundWin;
     private MediaPlayer menuSound;
+    public static MediaPlayer enemyDead;
+    public static MediaPlayer bomberDead;
+    public static MediaPlayer bom;
+    public static MediaPlayer bomSet;
 
     private GraphicsContext gc;
     private Canvas canvas;
@@ -52,22 +56,35 @@ public class BombermanGame extends Application {
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
 
-//        try {
-//            CacheDataLoader.getInstance().LoadData();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            CacheDataLoader.getInstance().LoadData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 //        gameMusic = CacheDataLoader.getInstance().getSound("gameMusicPro");
 //        gameMusic.setVolume(0.5);
 //        gameStart = CacheDataLoader.getInstance().getSound("gameStart");
 //        gameStart.setVolume(0.7);
 //
-//        soundWin = CacheDataLoader.getInstance().getSound("victory");
+//        soundWin = CacheDataLoader.getInstance().getSound("takeBom");
 //        soundWin.setVolume(1);
-//
-//        menuSound = CacheDataLoader.getInstance().getSound("menuProMix");
-//        menuSound.setVolume(0.7);
-//        menuSound.play();
+//        soundWin.play();
+
+        enemyDead = CacheDataLoader.getInstance().getSound("enemyDead");
+        enemyDead.setVolume(1);
+
+        bomberDead = CacheDataLoader.getInstance().getSound("playerDead");
+        bomberDead.setVolume(1);
+
+        bom = CacheDataLoader.getInstance().getSound("bommm");
+        bom.setVolume(1);
+
+        bomSet = CacheDataLoader.getInstance().getSound("bomSet");
+        bomSet.setVolume(1);
+
+        menuSound = CacheDataLoader.getInstance().getSound("menuProMix");
+        menuSound.setVolume(0.5);
+        menuSound.play();
 
         // Tao root container
         Group root = new Group();

@@ -2,8 +2,10 @@ package uet.oop.bomberman.entities;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.MediaPlayer;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.CacheDataLoader;
 
 import java.util.Random;
 
@@ -112,6 +114,8 @@ public  abstract class Enemy extends Animated{
     @Override
     public void killed() {
         this.alive = false;
+        BombermanGame.enemyDead.stop();
+        BombermanGame.enemyDead.play();
     }
 
     public abstract void detail_sprite();
