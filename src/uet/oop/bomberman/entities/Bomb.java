@@ -10,7 +10,6 @@ public class Bomb extends Animated{
     private int timeToExplode = 120;
     private int timeForExplode = 30;
     private boolean _exploded = false;
-    private int lvlbomb = 1;
     private DirectionBomb[] Explosion = null;
     private BombermanGame game;
 
@@ -19,15 +18,8 @@ public class Bomb extends Animated{
         this.game = game;
     }
 
-    public int getLvlbomb() {
-        return lvlbomb;
-    }
-
-    public void setLvlbomb(int lvlbomb) {
-        this.lvlbomb = lvlbomb;
-    }
-
     public void killed() {}
+
     @Override
     public void update() {
         animate();
@@ -83,9 +75,13 @@ public class Bomb extends Animated{
         }
 
         if(Explosion == null) {
-            Explosion = new DirectionBomb[lvlbomb * 4];
+            Explosion = new DirectionBomb[level_bomb * 4];
             for (int i = 0; i < Explosion.length; i++) {
                 boolean last = true;
+                if(level_bomb > 1) {
+                    if( i < 4) last = false;
+                    else last = true;
+                }
                 int x_ = this.x / Sprite.SCALED_SIZE;
                 int y_ = this.y / Sprite.SCALED_SIZE;
                 switch (i) {
@@ -101,12 +97,34 @@ public class Bomb extends Animated{
                     case 3:
                         x_--;
                         break;
+                    case 4:
+                        y_-=2;
+                        break;
+                    case 5:
+                        x_+=2;
+                        break;
+                    case 6:
+                        y_+=2;
+                        break;
+                    case 7:
+                        x_-=2;
+                        break;
                 }
                 DirectionBomb direction_ = new DirectionBomb(x_, y_, i, last);
+
                 Entity q = game.getObjectAt(x_, y_);
                 if(q != null) {
-                    if(q.collide(direction_)) {
-                        Explosion[i] = direction_;
+                    if(i > 3) {
+                        if(Explosion[i - 4] != null) {
+                            if(q.collide(direction_)) {
+                                Explosion[i] = direction_;
+                            }
+                        }
+                    }
+                    else {
+                        if(q.collide(direction_)) {
+                            Explosion[i] = direction_;
+                        }
                     }
                 }
             }

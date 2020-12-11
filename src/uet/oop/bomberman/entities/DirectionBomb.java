@@ -45,12 +45,38 @@ public class DirectionBomb extends Entity{
             }
             else this.img = Sprite.explosion_horizontal2.getFxImage();
         }
+        if(direction == 4) {
+            if(last == true) {
+                this.img = Sprite.explosion_vertical_top_last2.getFxImage();
+            }
+            else this.img = Sprite.explosion_vertical2.getFxImage();
+        }
+
+        if(direction == 5) {
+            if(last == true) {
+                this.img = Sprite.explosion_horizontal_right_last2.getFxImage();
+            }
+            else this.img = Sprite.explosion_horizontal2.getFxImage();
+        }
+        if(direction == 6) {
+            if(last == true) {
+                this.img = Sprite.explosion_vertical_down_last2.getFxImage();
+            }
+            else this.img = Sprite.explosion_vertical2.getFxImage();
+        }
+        if(direction == 7) {
+            if(last == true) {
+                this.img = Sprite.explosion_horizontal_left_last2.getFxImage();
+            }
+            else this.img = Sprite.explosion_horizontal2.getFxImage();
+        }
     }
 
     @Override
     public void update() {
 
     }
+
     @Override
     public boolean collide(Entity e) {
         if (e instanceof Bomber) {

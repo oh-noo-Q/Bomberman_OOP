@@ -36,8 +36,12 @@ public class Bomber extends Animated {
     @Override
     public void update() {
         animate();
-        if(bombs.size() > 0 && bombs.get(0).remove == true) {
-            bombs.remove(0);
+        if(bombs.size() > 0) {
+            for(int i = 0; i < bombs.size(); i++) {
+                if(bombs.get(i).isRemove() == true) {
+                    bombs.remove(i);
+                }
+            }
         }
         controll();
         if(alive == false) {
@@ -59,6 +63,16 @@ public class Bomber extends Animated {
             String keyName = event.getCode().toString();
             inputList.remove(keyName);
             moving = false;
+        });
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
+            if(key.getCode() == KeyCode.SPACE) {
+                if (bombs.size() < max_bomb) {
+                    int x = (this.x + 16) / Sprite.SCALED_SIZE;
+                    int y = (this.y + 16) / Sprite.SCALED_SIZE;
+                    Bomb b = new Bomb(x, y, this.game);
+                    bombs.add(b);
+                }
+            }
         });
     }
 
@@ -96,7 +110,6 @@ public class Bomber extends Animated {
 
     @Override
     public boolean collide(Entity e) {
-        System.out.println("???");
 
         if (e instanceof DirectionBomb) {
             killed();
@@ -139,14 +152,6 @@ public class Bomber extends Animated {
                     this.y += step;
                 }
                 moving = true;
-            }
-            if (inputList.contains("SPACE")) {
-                if (bombs.size() < max_bomb) {
-                    int x = (this.x + 16) / Sprite.SCALED_SIZE;
-                    int y = (this.y + 16) / Sprite.SCALED_SIZE;
-                    Bomb b = new Bomb(x, y, this.game);
-                    bombs.add(b);
-                }
             }
         }
     }
@@ -192,5 +197,17 @@ public class Bomber extends Animated {
         this.alive = true;
         timeForDie = 30;
         this.setRemove(false);
+    }
+
+    public void up_speed() {
+        this.step++;
+    }
+
+    public void up_bomb_size() {
+        this.max_bomb = 2;
+    }
+
+    public void up_flame() {
+        up_level_bomb();
     }
 }

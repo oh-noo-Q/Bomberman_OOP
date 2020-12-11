@@ -9,6 +9,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.Powerup.Bombsup;
+import uet.oop.bomberman.entities.Powerup.Flameup;
+import uet.oop.bomberman.entities.Powerup.Powerup;
+import uet.oop.bomberman.entities.Powerup.Speed;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -32,6 +36,7 @@ public class BombermanGame extends Application {
     public Bomber bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), this);
     private List<Brick> bricks = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
+    private List<Powerup> items = new ArrayList<>();
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -101,6 +106,12 @@ public class BombermanGame extends Application {
                         Oneal oneal = new Oneal(j, i, Sprite.oneal_left1.getFxImage(), Sprite.oneal_dead.getFxImage(), this);
                         enemies.add(oneal);
                     }
+                    if(x == 'f') {
+                        Powerup item = new Flameup(j, i);
+                        items.add(item);
+                        Brick b = new Brick(j, i);
+                        bricks.add(b);
+                    }
                     stillObjects.add(object);
                 }
             }
@@ -124,11 +135,20 @@ public class BombermanGame extends Application {
                 }
             }
         }
+        if(items.size() > 0) {
+            for(int i = 0; i < items.size(); i++) {
+                if(items.get(i).isRemove() == true) {
+                    items.remove(i);
+                    break;
+                }
+            }
+        }
     }
 
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         stillObjects.forEach(g -> g.render(gc));
+        items.forEach(g -> g.render(gc));
         bricks.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
         enemies.forEach(g -> g.render(gc));
@@ -141,6 +161,15 @@ public class BombermanGame extends Application {
             b = br.next();
             if(b.getX() / Sprite.SCALED_SIZE == x && b.getY() / Sprite.SCALED_SIZE == y) {
                 return b;
+            }
+        }
+
+        Iterator<Powerup> item = items.iterator();
+        Entity i;
+        while(item.hasNext()) {
+            i = item.next();
+            if(i.getX() / Sprite.SCALED_SIZE == x && i.getY() / Sprite.SCALED_SIZE == y) {
+                return i;
             }
         }
 
@@ -202,17 +231,6 @@ public class BombermanGame extends Application {
             }
         }
         return null;
-    }
-
-    public void move_map() {
-        for(int i = 0; i < stillObjects.size(); i++) {
-            int x = stillObjects.get(i).getX();
-            stillObjects.get(i).setX(x - 32);
-        }
-        for(int i = 0; i < bricks.size(); i++) {
-            int x = bricks.get(i).getX();
-            bricks.get(i).setX(x - 32);
-        }
     }
 
     public void reset_player() {

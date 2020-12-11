@@ -67,9 +67,11 @@ public  abstract class Enemy extends Animated{
     }
 
     public boolean can_move(int x0, int y0, BombermanGame game) {
-        for(int i = 0; i < 4; i++) {
-            double x_ = (x0 * step + this.x + i % 2 * 20 + 8) / Sprite.SCALED_SIZE;
-            double y_ = (y0 * step + this.y + i / 2 * 30 + 12) / Sprite.SCALED_SIZE;
+        int dX = 0, dY = 0;
+        if(x0 > 0) dX = 40;
+        if(y0 > 0) dY = 40;
+            double x_ = (x0 * step + this.x + dX) / Sprite.SCALED_SIZE;
+            double y_ = (y0 * step + this.y + dY) / Sprite.SCALED_SIZE;
 
             Entity x = game.getObjectAt((int)x_, (int)y_);
             if(x != null) {
@@ -82,7 +84,6 @@ public  abstract class Enemy extends Animated{
             if (x != null) {
                 x.collide(this);
             }
-        }
         return true;
     }
 
