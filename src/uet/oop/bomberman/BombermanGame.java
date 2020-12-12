@@ -7,15 +7,17 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
-import uet.oop.bomberman.entities.Powerup.Bombsup;
-import uet.oop.bomberman.entities.Powerup.Flameup;
-import uet.oop.bomberman.entities.Powerup.Powerup;
-import uet.oop.bomberman.entities.Powerup.Speed;
+import uet.oop.bomberman.entities.Powerup.*;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.sound.CacheDataLoader;
+
+import javax.swing.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,6 +45,8 @@ public class BombermanGame extends Application {
 
     private GraphicsContext gc;
     private Canvas canvas;
+    private JLabel aliveLabel;
+    private JLabel pointLabel;
     private List<Entity> entities = new ArrayList<>();
     private List<Entity> stillObjects = new ArrayList<>();
     public Bomber bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), this);
@@ -101,6 +105,17 @@ public class BombermanGame extends Application {
         // Them scene vao stage
         stage.setScene(scene);
         stage.show();
+        final long[] startTime = {0};
+        Label gametime = new javafx.scene.control.Label("GAME OVER");
+        gametime.setLayoutX(100);
+        gametime.setLayoutY(100);
+        gametime.setFont(new Font("Arial", 50));
+        gametime.setTextFill(Color.BLACK);
+
+        Group root2 = new Group();
+        root2.getChildren().add(gametime);
+        Scene blackwindow= new Scene(root2);
+
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -154,6 +169,21 @@ public class BombermanGame extends Application {
                         Brick b = new Brick(j, i);
                         bricks.add(b);
                     }
+
+                    if(x == 's') {
+                        Powerup item = new Speed(j, i);
+                        items.add(item);
+                        Brick b = new Brick(j, i);
+                        bricks.add(b);
+                    }
+
+                    if(x == 'x') {
+                        Powerup item = new Portal(j, i);
+                        items.add(item);
+                        Brick b = new Brick(j, i);
+                        bricks.add(b);
+                    }
+                    if(x != 'x')
                     stillObjects.add(object);
                 }
             }

@@ -13,9 +13,10 @@ public class Bomb extends Animated{
     private DirectionBomb[] Explosion = null;
     private BombermanGame game;
 
-    public Bomb(int x, int y, BombermanGame game) {
+    public Bomb(int x, int y, BombermanGame game, int level_bomb) {
         super(x, y, Sprite.bomb.getFxImage());
         this.game = game;
+        this.level_bomb = level_bomb;
     }
 
     public void killed() {}

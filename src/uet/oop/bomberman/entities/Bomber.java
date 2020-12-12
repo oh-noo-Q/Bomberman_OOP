@@ -69,7 +69,7 @@ public class Bomber extends Animated {
                 if (bombs.size() < max_bomb) {
                     int x = (this.x + 16) / Sprite.SCALED_SIZE;
                     int y = (this.y + 16) / Sprite.SCALED_SIZE;
-                    Bomb b = new Bomb(x, y, this.game);
+                    Bomb b = new Bomb(x, y, this.game, level_bomb);
                     bombs.add(b);
                 }
             }
@@ -159,12 +159,6 @@ public class Bomber extends Animated {
             if (inputList.contains("SPACE")) {
                 BombermanGame.bomSet.stop();
                 BombermanGame.bomSet.play();
-                if (bombs.size() < max_bomb) {
-                    int x = (this.x + 16) / Sprite.SCALED_SIZE;
-                    int y = (this.y + 16) / Sprite.SCALED_SIZE;
-                    Bomb b = new Bomb(x, y, this.game);
-                    bombs.add(b);
-                }
             }
 
         }
